@@ -27,6 +27,9 @@ public class FrmLogin extends javax.swing.JFrame {
     /**
      * Creates new form FrmLogin
      */
+    
+    private boolean isLogin = false;
+    
     public FrmLogin() {
         initComponents();
 
@@ -48,7 +51,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 btnIngresar.setBackground(new Color(174, 217, 224));
             }
         });
-        
+
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCancelar.setBackground(new Color(250, 243, 221));
@@ -58,12 +61,6 @@ public class FrmLogin extends javax.swing.JFrame {
                 btnCancelar.setBackground(new Color(174, 217, 224));
             }
         });
-
-        /*double x = 50;
-        double y = 50;
-        this.setShape(new RoundRectangle2D.Double(x, y, 600, 474, 50, 50));
-        //this.setSize(800, 800);
-        this.setLocationByPlatform(true);*/
     }
 
     /**
@@ -149,6 +146,11 @@ public class FrmLogin extends javax.swing.JFrame {
         btnIngresar.setMaximumSize(new java.awt.Dimension(83, 56));
         btnIngresar.setMinimumSize(new java.awt.Dimension(83, 56));
         btnIngresar.setPreferredSize(new java.awt.Dimension(83, 56));
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         lblRegistro.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblRegistro.setText("Registrarse");
@@ -225,6 +227,39 @@ public class FrmLogin extends javax.swing.JFrame {
         System.out.println("Hola");
     }//GEN-LAST:event_lblRegistroMouseClicked
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        try {
+
+            ConnectionClass cn = new ConnectionClass();
+            cn.conexion("proyectofinal", "develop", "abc123**");
+
+            String query = "SELECT id, usuario, contraseña FROM usuarios";
+
+            ResultSet rs = cn.select(query);
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+
+                String usuario = rs.getString("usuario");
+                String pass = rs.getString("contraseña");
+
+                if (usuario.equals(txtUsuario.getText()) && pass.equals(String.valueOf(txtContraseña.getPassword()))) {
+                    setIsLogin(true);
+                    new FrmTuto().setVisible(true);
+                    this.dispose();
+                    //System.out.println("Login realizado correctamente");
+                }else{
+                    System.out.println("Usuario o contraseña incorrecto");
+                }
+
+                //System.out.format("%s, %s, %s\n", id, usuario, pass);
+            }
+            cn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +293,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 new FrmLogin().setVisible(true);
             }
         });
+    }
+    
+    public void setIsLogin(boolean isLogin){
+        this.isLogin = isLogin;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
