@@ -122,6 +122,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtUsuario">
+              <Properties>
+                <Property name="columns" type="int" value="2"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblContrase&#xf1;a">
               <Properties>

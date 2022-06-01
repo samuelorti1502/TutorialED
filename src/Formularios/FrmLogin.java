@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -132,6 +133,8 @@ public class FrmLogin extends javax.swing.JFrame {
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblUsuario.setText("Usuario");
         pnlUP.add(lblUsuario);
+
+        txtUsuario.setColumns(2);
         pnlUP.add(txtUsuario);
 
         lblContraseña.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -223,10 +226,6 @@ public class FrmLogin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void lblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseClicked
-        System.out.println("Hola");
-    }//GEN-LAST:event_lblRegistroMouseClicked
-
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         try {
 
@@ -259,6 +258,11 @@ public class FrmLogin extends javax.swing.JFrame {
             Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void lblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseClicked
+        new FrmUsuario().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblRegistroMouseClicked
 
     /**
      * @param args the command line arguments
