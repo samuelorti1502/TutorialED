@@ -5,7 +5,12 @@
  */
 package Formularios;
 
+import Clases.ConnectionClass;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javafx.scene.control.DatePicker;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,13 +23,50 @@ public class FrmUsuario extends javax.swing.JFrame {
      */
     public FrmUsuario() {
         initComponents();
-        
+
         getContentPane().setBackground(new Color(174, 217, 224));
         pnlTitulo.setBackground(new Color(184, 242, 230));
         pnlUsuario.setBackground(new Color(174, 217, 224));
         pnlDatos.setBackground(new Color(174, 217, 224));
         pnlDatos1.setBackground(new Color(174, 217, 224));
         pnlBotones.setBackground(new Color(174, 217, 224));
+
+        btnCrear.setBackground(new Color(250, 243, 221));
+        btnCancelar.setBackground(new Color(250, 243, 221));
+
+        btnCrear.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCrear.setBackground(new Color(94, 100, 114));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCrear.setBackground(new Color(250, 243, 221));
+            }
+        });
+
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelar.setBackground(new Color(94, 100, 114));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelar.setBackground(new Color(250, 243, 221));
+            }
+        });
+
+        //DatePicker dp = new DatePicker();
+        this.txtCodigo.setText(generarCodigo());
+    }
+
+    private String generarCodigo() {
+        Date date = new Date();
+        SimpleDateFormat DateFor = new SimpleDateFormat("yyyyMMddHHmmss");
+
+        return DateFor.format(date);
     }
 
     /**
@@ -39,34 +81,34 @@ public class FrmUsuario extends javax.swing.JFrame {
         pnlUsuario = new javax.swing.JPanel();
         pnlDatos = new javax.swing.JPanel();
         pnlDatos1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        lblNombre1 = new javax.swing.JLabel();
+        txtNombre1 = new javax.swing.JTextField();
+        lblNombre2 = new javax.swing.JLabel();
+        txtNombre2 = new javax.swing.JTextField();
+        lblApellido1 = new javax.swing.JLabel();
+        txtApellido1 = new javax.swing.JTextField();
+        lblApellido2 = new javax.swing.JLabel();
+        txtApellido2 = new javax.swing.JTextField();
+        lblNac = new javax.swing.JLabel();
+        txtNac = new javax.swing.JTextField();
+        lblTel = new javax.swing.JLabel();
+        txtTel = new javax.swing.JTextField();
+        lblMail = new javax.swing.JLabel();
+        txtMail = new javax.swing.JTextField();
+        lblUsuario = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        lblContra1 = new javax.swing.JLabel();
+        txtContra1 = new javax.swing.JPasswordField();
+        lblContra2 = new javax.swing.JLabel();
+        txtContra2 = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         pnlBotones = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCrear = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         pnlTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -76,64 +118,64 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         pnlDatos1.setLayout(new java.awt.GridLayout(6, 4, 10, 15));
 
-        jLabel3.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel3.setText("Código");
-        pnlDatos1.add(jLabel3);
-        pnlDatos1.add(jTextField1);
+        lblCodigo.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblCodigo.setText("Código");
+        pnlDatos1.add(lblCodigo);
+        pnlDatos1.add(txtCodigo);
         pnlDatos1.add(jLabel15);
         pnlDatos1.add(jLabel16);
 
-        jLabel4.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel4.setText("Primer Nombre");
-        pnlDatos1.add(jLabel4);
-        pnlDatos1.add(jTextField2);
+        lblNombre1.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblNombre1.setText("Primer Nombre");
+        pnlDatos1.add(lblNombre1);
+        pnlDatos1.add(txtNombre1);
 
-        jLabel5.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel5.setText("Segundo Nombre");
-        pnlDatos1.add(jLabel5);
+        lblNombre2.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblNombre2.setText("Segundo Nombre");
+        pnlDatos1.add(lblNombre2);
 
-        jTextField3.setPreferredSize(new java.awt.Dimension(85, 29));
-        pnlDatos1.add(jTextField3);
+        txtNombre2.setPreferredSize(new java.awt.Dimension(85, 29));
+        pnlDatos1.add(txtNombre2);
 
-        jLabel7.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel7.setText("Primer Apellido");
-        pnlDatos1.add(jLabel7);
-        pnlDatos1.add(jTextField4);
+        lblApellido1.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblApellido1.setText("Primer Apellido");
+        pnlDatos1.add(lblApellido1);
+        pnlDatos1.add(txtApellido1);
 
-        jLabel8.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel8.setText("Segundo Apellido");
-        pnlDatos1.add(jLabel8);
-        pnlDatos1.add(jTextField5);
+        lblApellido2.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblApellido2.setText("Segundo Apellido");
+        pnlDatos1.add(lblApellido2);
+        pnlDatos1.add(txtApellido2);
 
-        jLabel10.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel10.setText("Fecha de Nacimiento");
-        pnlDatos1.add(jLabel10);
-        pnlDatos1.add(jTextField6);
+        lblNac.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblNac.setText("Fecha de Nacimiento");
+        pnlDatos1.add(lblNac);
+        pnlDatos1.add(txtNac);
 
-        jLabel9.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel9.setText("Telefono");
-        pnlDatos1.add(jLabel9);
-        pnlDatos1.add(jTextField7);
+        lblTel.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblTel.setText("Telefono");
+        pnlDatos1.add(lblTel);
+        pnlDatos1.add(txtTel);
 
-        jLabel11.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel11.setText("Email");
-        pnlDatos1.add(jLabel11);
-        pnlDatos1.add(jTextField8);
+        lblMail.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblMail.setText("Email");
+        pnlDatos1.add(lblMail);
+        pnlDatos1.add(txtMail);
 
-        jLabel12.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel12.setText("Usuario");
-        pnlDatos1.add(jLabel12);
-        pnlDatos1.add(jTextField9);
+        lblUsuario.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblUsuario.setText("Usuario");
+        pnlDatos1.add(lblUsuario);
+        pnlDatos1.add(txtUsuario);
 
-        jLabel13.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel13.setText("Contraseña");
-        pnlDatos1.add(jLabel13);
-        pnlDatos1.add(jTextField10);
+        lblContra1.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblContra1.setText("Contraseña");
+        pnlDatos1.add(lblContra1);
+        pnlDatos1.add(txtContra1);
 
-        jLabel14.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
-        jLabel14.setText("Confirmar Contraseña");
-        pnlDatos1.add(jLabel14);
-        pnlDatos1.add(jTextField11);
+        lblContra2.setFont(new java.awt.Font("Dubai Medium", 1, 18)); // NOI18N
+        lblContra2.setText("Confirmar Contraseña");
+        pnlDatos1.add(lblContra2);
+        pnlDatos1.add(txtContra2);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pinwi.png"))); // NOI18N
@@ -166,24 +208,29 @@ public class FrmUsuario extends javax.swing.JFrame {
 
         pnlBotones.setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setFont(new java.awt.Font("Dubai Medium", 1, 36)); // NOI18N
-        jButton1.setText("Crear");
-        jButton1.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnCrear.setFont(new java.awt.Font("Dubai Medium", 1, 36)); // NOI18N
+        btnCrear.setText("Crear");
+        btnCrear.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 15);
-        pnlBotones.add(jButton1, gridBagConstraints);
+        pnlBotones.add(btnCrear, gridBagConstraints);
 
-        jButton2.setFont(new java.awt.Font("Dubai Medium", 1, 36)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.setPreferredSize(new java.awt.Dimension(200, 60));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setFont(new java.awt.Font("Dubai Medium", 1, 36)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setPreferredSize(new java.awt.Dimension(200, 60));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.insets = new java.awt.Insets(0, 15, 0, 15);
-        pnlBotones.add(jButton2, gridBagConstraints);
+        pnlBotones.add(btnCancelar, gridBagConstraints);
 
         javax.swing.GroupLayout pnlUsuarioLayout = new javax.swing.GroupLayout(pnlUsuario);
         pnlUsuario.setLayout(pnlUsuarioLayout);
@@ -277,9 +324,47 @@ public class FrmUsuario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+
+        String pass = null;
+
+        if (String.valueOf(txtContra1.getPassword()).equals(String.valueOf(txtContra2.getPassword()))) {
+            pass = String.valueOf(txtContra1.getPassword());
+
+            try {
+                ConnectionClass cn = new ConnectionClass();
+                cn.conexion("proyectofinal", "develop", "abc123**");
+
+                String query = "INSERT INTO `proyectofinal`.`usuarios` (`codigo`, `nombre1`,`nombre2`,`apellido1`,`apellido2`,`fecha_nacimiento`,`usuario`,"
+                        + " `contraseña`,`telefono`,`email`) VALUES("
+                        + "'" + txtCodigo.getText() + "',"
+                        + "'" + txtNombre1.getText() + "',"
+                        + "'" + txtNombre2.getText() + "',"
+                        + "'" + txtApellido1.getText() + "',"
+                        + "'" + txtApellido2.getText() + "',"
+                        + "'" + txtNac.getText() + "',"
+                        + "'" + txtUsuario.getText() + "',"
+                        + "'" + pass + "',"
+                        + "'" + txtTel.getText() + "',"
+                        + "'" + txtMail.getText() + "'"
+                        + ");";
+
+                //System.out.println("query = " + query);
+                cn.insert(query);
+
+            } catch (Exception e) {
+
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden", "Adverventcia", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnCrearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,40 +402,40 @@ public class FrmUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCrear;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblApellido1;
+    private javax.swing.JLabel lblApellido2;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblContra1;
+    private javax.swing.JLabel lblContra2;
+    private javax.swing.JLabel lblMail;
+    private javax.swing.JLabel lblNac;
+    private javax.swing.JLabel lblNombre1;
+    private javax.swing.JLabel lblNombre2;
+    private javax.swing.JLabel lblTel;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnlBotones;
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JPanel pnlDatos1;
     private javax.swing.JPanel pnlTitulo;
     private javax.swing.JPanel pnlUsuario;
+    private javax.swing.JTextField txtApellido1;
+    private javax.swing.JTextField txtApellido2;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JPasswordField txtContra1;
+    private javax.swing.JPasswordField txtContra2;
+    private javax.swing.JTextField txtMail;
+    private javax.swing.JTextField txtNac;
+    private javax.swing.JTextField txtNombre1;
+    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextField txtTel;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

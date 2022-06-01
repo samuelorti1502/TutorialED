@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,6 +62,7 @@ public class ConnectionClass {
             System.out.println("Record is inserted in the table successfully");
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionClass.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
     

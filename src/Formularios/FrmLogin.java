@@ -7,17 +7,10 @@ package Formularios;
 
 import Clases.ConnectionClass;
 import java.awt.Color;
-import java.awt.geom.RoundRectangle2D;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 /**
  *
@@ -44,20 +37,24 @@ public class FrmLogin extends javax.swing.JFrame {
         btnCancelar.setBackground(new Color(174, 217, 224));
 
         btnIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnIngresar.setBackground(new Color(250, 243, 221));
             }
 
+            @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnIngresar.setBackground(new Color(174, 217, 224));
             }
         });
 
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCancelar.setBackground(new Color(250, 243, 221));
             }
 
+            @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnCancelar.setBackground(new Color(174, 217, 224));
             }
