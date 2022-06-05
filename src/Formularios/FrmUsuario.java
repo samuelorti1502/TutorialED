@@ -13,7 +13,10 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Image;
+import java.awt.TextField;
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -23,6 +26,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -38,6 +43,8 @@ public class FrmUsuario extends javax.swing.JFrame {
     private String mensaje;
     Reloj reloj = new Reloj();
     File archivo;
+    private ImageIcon Img;
+    private Icon icono;
 
     public FrmUsuario() {
         initComponents();
@@ -380,6 +387,8 @@ public class FrmUsuario extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
         new FrmLogin().setVisible(true);
+
+        //borrarTextos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
@@ -400,7 +409,7 @@ public class FrmUsuario extends javax.swing.JFrame {
                     cn.conexion("proyectofinal", "develop", "abc123**");
 
                     String query = "INSERT INTO `proyectofinal`.`usuarios` (`codigo`, `nombre1`,`nombre2`,`apellido1`,`apellido2`,`fecha_nacimiento`,`usuario`,"
-                            + " `contraseña`,`telefono`,`email`) VALUES("
+                            + " `contraseña`,`telefono`,`email`, url) VALUES("
                             + "'" + txtCodigo.getText() + "',"
                             + "'" + txtNombre1.getText() + "',"
                             + "'" + txtNombre2.getText() + "',"
@@ -410,7 +419,8 @@ public class FrmUsuario extends javax.swing.JFrame {
                             + "'" + txtUsuario.getText() + "',"
                             + "'" + pass + "',"
                             + "'" + txtTel.getText() + "',"
-                            + "'" + txtMail.getText() + "'"
+                            + "'" + txtMail.getText() + "',"
+                            + "'./src/Images/Fotos/U " + txtCodigo.getText() + ".jpg'"
                             + ");";
 
                     cn.insert(query);
@@ -421,7 +431,7 @@ public class FrmUsuario extends javax.swing.JFrame {
                     codigoQR("id:" + txtCodigo.getText() + ",usuario:" + txtUsuario.getText() + ",contraseña:" + pass);
 
                     FrmQR frmQr = new FrmQR(this.txtCodigo.getText());
-                    if (dialogButton == JOptionPane.YES_OPTION) {
+                    if (dialogButton == 1) {
                         System.out.println("Mostar codigo QR");
                         //paintimages();
 
@@ -430,6 +440,9 @@ public class FrmUsuario extends javax.swing.JFrame {
                     } else {
                         frmQr.setVisible(false);
                         frmQr.dispose();
+
+                        borrarTextos();
+
                         System.out.println("No mostrar QR");
                     }
 
@@ -455,6 +468,17 @@ public class FrmUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    public static void resetTextFields(Container c) {
+        Component[] components = c.getComponents();
+        for (int i = 0; i < components.length; i++) {
+            if (components[i] instanceof Container) {
+                resetTextFields((Container) components[i]);
+            } else if (components[i] instanceof TextField) {
+                ((TextField) components[i]).setText("");
+            }
+        }
+    }
+
     public void codigoQR(String textoCodigo) {
         try {
 
@@ -466,6 +490,36 @@ public class FrmUsuario extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
+    }
+
+    public void borrarTextos() {
+        JTextField temp = null;
+        JPasswordField temp2 = null;
+
+        for (Component c : pnlDatos1.getComponents()) {
+            if (c.getClass().toString().contains("javax.swing.JTextField")) {
+                temp = (JTextField) c;
+                temp.setText("");
+            }
+        }
+
+        for (Component c : pnlDatos1.getComponents()) {
+            if (c.getClass().toString().contains("javax.swing.JPasswordField")) {
+                temp2 = (JPasswordField) c;
+                temp2.setText("");
+            }
+        }
+
+        this.txtCodigo.setText(generarCodigo());
+        this.chkUsuario.setSelected(false);
+
+        String rutaImagen = "./src/Images/pinwi.png";
+
+        Img = new ImageIcon(rutaImagen);
+        icono = new ImageIcon(Img.getImage().getScaledInstance(154, 178,
+                Image.SCALE_DEFAULT));
+        lblImagen.setIcon(icono);
+
     }
 
     private void txtContra1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContra1KeyReleased

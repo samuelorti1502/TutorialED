@@ -21,9 +21,12 @@ public class FrmLogin extends javax.swing.JFrame {
     /**
      * Creates new form FrmLogin
      */
-    
     private boolean isLogin = false;
     
+    private String usuario;
+    private String codigo;
+    private String url;
+
     public FrmLogin() {
         initComponents();
 
@@ -86,8 +89,9 @@ public class FrmLogin extends javax.swing.JFrame {
         txtContraseña = new javax.swing.JPasswordField();
         pnlBotones = new javax.swing.JPanel();
         btnIngresar = new javax.swing.JButton();
-        lblRegistro = new javax.swing.JLabel();
+        lblIQR = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        lblRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -152,11 +156,11 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
-        lblRegistro.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblRegistro.setText("Registrarse");
-        lblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblIQR.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblIQR.setText("Ingresar con QR");
+        lblIQR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblRegistroMouseClicked(evt);
+                lblIQRMouseClicked(evt);
             }
         });
 
@@ -165,6 +169,14 @@ public class FrmLogin extends javax.swing.JFrame {
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
+            }
+        });
+
+        lblRegistro.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblRegistro.setText("Registrarse");
+        lblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistroMouseClicked(evt);
             }
         });
 
@@ -178,18 +190,22 @@ public class FrmLogin extends javax.swing.JFrame {
                     .addGroup(pnlBotonesLayout.createSequentialGroup()
                         .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
-                    .addGroup(pnlBotonesLayout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotonesLayout.createSequentialGroup()
                         .addComponent(lblRegistro)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(6, 6, 6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblIQR)
+                        .addContainerGap())))
         );
         pnlBotonesLayout.setVerticalGroup(
             pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBotonesLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(lblRegistro)
-                .addGap(18, 18, 18)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIQR)
+                    .addComponent(lblRegistro))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -230,23 +246,27 @@ public class FrmLogin extends javax.swing.JFrame {
             ConnectionClass cn = new ConnectionClass();
             cn.conexion("proyectofinal", "develop", "abc123**");
 
-            String query = "SELECT id, usuario, contraseña FROM usuarios";
+            String query = "SELECT id, codigo, usuario, contraseña, url FROM usuarios";
 
             ResultSet rs = cn.select(query);
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-
-                String usuario = rs.getString("usuario");
+                
+                this.setCodigo(rs.getString("codigo"));
+                this.setUsuario(rs.getString("usuario"));
+                this.setUrl(rs.getString("url"));
                 String pass = rs.getString("contraseña");
 
-                if (usuario.equals(txtUsuario.getText()) && pass.equals(String.valueOf(txtContraseña.getPassword()))) {
+                if (getUsuario().equals(txtUsuario.getText()) && pass.equals(String.valueOf(txtContraseña.getPassword()))) {
                     setIsLogin(true);
-                    new FrmTuto().setVisible(true);
+                    
+                    FrmTuto tuto = new FrmTuto();
+                    tuto.usuario(getUsuario(), getCodigo(), getUrl());
+                    tuto.setVisible(true);
+                    
                     this.dispose();
                     //System.out.println("Login realizado correctamente");
-                }else{
-                    System.out.println("Usuario o contraseña incorrecto");
                 }
 
                 //System.out.format("%s, %s, %s\n", id, usuario, pass);
@@ -256,6 +276,10 @@ public class FrmLogin extends javax.swing.JFrame {
             Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void lblIQRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIQRMouseClicked
+        new FrmIngresarQR().setVisible(true);
+    }//GEN-LAST:event_lblIQRMouseClicked
 
     private void lblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistroMouseClicked
         new FrmUsuario().setVisible(true);
@@ -296,8 +320,8 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void setIsLogin(boolean isLogin){
+
+    public void setIsLogin(boolean isLogin) {
         this.isLogin = isLogin;
     }
 
@@ -307,6 +331,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblContraseña;
+    private javax.swing.JLabel lblIQR;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPanel pnlBotones;
@@ -316,4 +341,28 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
